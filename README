@@ -2,10 +2,13 @@ Compiler installation:
     sudo apt-get install nasm
 
 To assemble the program:
-    nasm -f elf hello.asm
+    as -o quit.o quit.s
 
 Link:
-    ld -s -o hello hello.o
+    ld -s -o quit quit.o
 
 Run:
-    sudo ./hello
+    sudo ./quit
+
+Check return value:
+    echo $?
