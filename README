@@ -1,14 +1,14 @@
-Compiler installation:
-    sudo apt-get install nasm
+Compile:
+    gcc ex.c
 
-To assemble the program:
-    as -o quit.o quit.s
+这个程序将变量a的值赋给b。
+"r"(a)指示编译器分配一个寄存器保存变量a的值，作为汇编指令的输入，也就是指令中的%1（按照约束条件的顺序，b对应%0，a对应1%），
+至于%1究竟代表哪个寄存器则由编译器自己决定。
 
-Link:
-    ld -s -o quit quit.o
+汇编指令首先把%1所代表的寄存器的值传给eax（为了和%1这种占位符区分，eax前面要求加两个%号），然后把eax的值
+再传给%0所代表的寄存器。"=r"(b)就表示把%0所代表的寄存器的值输出给变量b。
 
-Run:
-    sudo ./quit
+r    使用任何可用的通用寄存器
 
-Check return value:
-    echo $?
+在执行这两条指令的过程中，寄存器eax的值被改变了，所以把"%eax"写在第四部分，
+告诉编译器在执行这条__asm__语句时eax要被改写，所以在此期间不要用eax保存其它值。
