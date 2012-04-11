@@ -1,0 +1,11 @@
+Compiler installation:
+    sudo apt-get install nasm
+
+To assemble the program:
+    nasm -f elf hello.asm
+
+Link:
+    ld -s -o hello hello.o
+
+Run:
+    sudo ./hello
